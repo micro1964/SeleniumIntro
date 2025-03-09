@@ -23,33 +23,40 @@ public class BookStoreHomePage extends Base{
 	public BookStoreHomePage() {
 		this.driver = getDriver();
 		PageFactory.initElements(driver, this);
+		logDebugMessage("PageFactory initialised on BookStore Home Page.");
 	}
 
 	public void clickBookStoreCard() {
 		scrollPageDown();
 		wBookStoreCard.click();
+		logInfoMessage("BookStoreCard clicked.");
 	}
 	
 	//Scrolls down till the bottom of the page
 	public void scrollPageDown() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+		logInfoMessage("Pressing the Scroll Down button...");
 	}
 	
 	public String getWindowTitle() {
+		logInfoMessage("Retrieving the browser title");
 		return driver.getTitle();
 	}
 	
 	public boolean isBookStoreAppMenuItemDisplayed() {
+		logInfoMessage("Checking if BookStoreAppMenuItem is displayed.");
 		return wBookStoreAppMenuItem.isDisplayed();
 	}
 	
 	public boolean isLoginButtonDisplayed() {
-		waitForElementToBeVisible(wLoginButton,5,1);
+		waitForElementToBeVisible(wLoginButton,7,1);
+		logInfoMessage("Checking if Login Button is displayed.");
 		return wLoginButton.isDisplayed();
 	}
 	
 	public void waitForElementToBeVisible(WebElement element, int timeoutInSeconds, int pollingInMillis) {
+		logInfoMessage("Waiting for WebElement "+element.getAccessibleName());
         FluentWait<WebDriver> wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(timeoutInSeconds))  // Maximum wait time
                 .pollingEvery(Duration.ofMillis(pollingInMillis))   // Polling interval

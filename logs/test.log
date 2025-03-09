@@ -1,0 +1,8 @@
+2025-03-09 23:04:07 [main] INFO  Base - 23:4:6 on 9/MARCH/2025:- Chrome Driver is selected.
+2025-03-09 23:04:22 [main] INFO  Base - 23:4:22 on 9/MARCH/2025:- Pressing the Scroll Down button...
+2025-03-09 23:04:23 [main] INFO  Base - 23:4:23 on 9/MARCH/2025:- BookStoreCard clicked.
+2025-03-09 23:04:23 [main] INFO  Base - 23:4:23 on 9/MARCH/2025:- Retrieving the browser title
+2025-03-09 23:04:23 [main] INFO  Base - 23:4:23 on 9/MARCH/2025:- Checking if BookStoreAppMenuItem is displayed.
+2025-03-09 23:04:23 [main] INFO  Base - 23:4:23 on 9/MARCH/2025:- Waiting for WebElement Login
+2025-03-09 23:04:23 [main] INFO  Base - 23:4:23 on 9/MARCH/2025:- Checking if Login Button is displayed.
+2025-03-09 23:04:25 [main] INFO  Base - 23:4:25 on 9/MARCH/2025:- Closing Browser!!!

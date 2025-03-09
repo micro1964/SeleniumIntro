@@ -13,7 +13,7 @@ public class BookStoreHomeTest {
 	
 	@Test
 	public void canNavigateToBookStoreHomePage() {
-		
+		Base.logInfoMessage("Starting canNavigateToBookStoreHomePage Test.");
 		bsHomePage.clickBookStoreCard();
 		
 		//Check for expected title

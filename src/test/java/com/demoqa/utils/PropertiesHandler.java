@@ -7,7 +7,7 @@ import java.util.Properties;
 public class PropertiesHandler {
 
 	static Properties config = new Properties();
-	static Properties objectRepo = new Properties();
+	public static Properties objectRepo = new Properties();
 
 	public static String fs = System.getProperty("file.separator");
 	public static String userDir = System.getProperty("user.dir");
@@ -21,13 +21,15 @@ public class PropertiesHandler {
 		FileInputStream fis = new FileInputStream(configFile);
 		try {
 				config.load(fis);
-				config.getProperty(strKey);
+				result=config.getProperty(strKey);
 			} catch (Exception e) {
 				e.getMessage();
 			}
 		return result;
 		}
 	
+	/*
+	NOT Needed due to PageFactory limitation - Value must be a constant
 	public static String getObjectRepo(String strKey) throws FileNotFoundException {
 		String result="";
 		FileInputStream fis2 = new FileInputStream(objectRepoFile);
@@ -39,5 +41,6 @@ public class PropertiesHandler {
 
 		return result;
 	}
+	*/
 
 }

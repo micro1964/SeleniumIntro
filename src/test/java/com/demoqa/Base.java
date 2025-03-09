@@ -25,22 +25,23 @@ import com.demoqa.utils.PropertiesHandler;
  * @Author	Reggy Williams
  */
 
-
 public class Base {
-	
+
 	public static WebDriver driver;
-	
-	public static WebDriver getDriver() throws FileNotFoundException {
-		
-		switch(PropertiesHandler.getConfig("browserType")) {
+
+	public static WebDriver getDriver() {
+
+		try {
+
+			switch (PropertiesHandler.getConfig("browserType")) {
 			case "chrome":
-				driver = new  ChromeDriver();
+				driver = new ChromeDriver();
 				break;
-			
+
 			case "firefox":
 				driver = new FirefoxDriver();
 				break;
-				
+
 			case "internetexplorer":
 				driver = new InternetExplorerDriver();
 				break;
@@ -51,26 +52,38 @@ public class Base {
 				driver = new EdgeDriver();
 				break;
 			default:
-				driver = new  ChromeDriver();
+				driver = new ChromeDriver();
 				break;
-				}
-		//Set Implicit Wait
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.parseInt(PropertiesHandler.getConfig("implicitWait"))));
-		
-		//Navigate to Application under test
-		driver.get(PropertiesHandler.getConfig("applicationUnderTest"));
-		
-		//Maximise Window
-		driver.manage().window().maximize();
-			
-		return driver;
+			}
+
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
 		}
-	
+
+		// Maximise Window
+		driver.manage().window().maximize();
+		
+		// Navigate to Application under test
+		goToApplicationUnderTest();
+		
+		return driver;
+	}
+
 	public static void closeBrowser() {
-		if(driver!= null) {
+		if (driver != null) {
 			driver.quit();
 			driver = null;
-			}
 		}
+	}
+
+	public static void goToApplicationUnderTest() {
+		try {
+			Thread.sleep(Duration.ofSeconds(2));
+			String sUrl = PropertiesHandler.getConfig("applicationUnderTest");
+			driver.get(sUrl);
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
 
 }

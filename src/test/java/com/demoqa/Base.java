@@ -1,10 +1,11 @@
 package com.demoqa;
 
 import java.io.FileNotFoundException;
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
@@ -29,7 +30,6 @@ public class Base {
 	
 	public static WebDriver driver;
 	
-	@SuppressWarnings("deprecation")
 	public static WebDriver getDriver() throws FileNotFoundException {
 		
 		switch(PropertiesHandler.getConfig("browserType")) {
@@ -44,14 +44,25 @@ public class Base {
 			case "internetexplorer":
 				driver = new InternetExplorerDriver();
 				break;
+			case "ie":
+				driver = new InternetExplorerDriver();
+				break;
+			case "edge":
+				driver = new EdgeDriver();
+				break;
 			default:
 				driver = new  ChromeDriver();
 				break;
 				}
+		//Set Implicit Wait
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.parseInt(PropertiesHandler.getConfig("implicitWait"))));
+		
+		//Navigate to Application under test
+		driver.get(PropertiesHandler.getConfig("applicationUnderTest"));
+		
+		//Maximise Window
+		driver.manage().window().maximize();
 			
-			driver.get(PropertiesHandler.getConfig("applicationUnderTest"));
-			driver.manage().window().maximize();
-			driver.manage().timeouts().implicitlyWait(Integer.parseInt(PropertiesHandler.getConfig("implicitWait")),TimeUnit.SECONDS);
 		return driver;
 		}
 

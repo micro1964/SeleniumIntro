@@ -12,7 +12,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.demoqa.utils.PropertiesHandler;
 
 /*
@@ -20,7 +26,7 @@ import com.demoqa.utils.PropertiesHandler;
  * 
  *	WebDriver - Done
  * 	Test Properties - Done
- * 	Logs
+ * 	Logs -Done
  * 	Reporting
  * 	DataBase
  * 	Mail
@@ -35,7 +41,14 @@ public class Base {
 
     private static final Logger logger = LogManager.getLogger(Base.class);
 	
+    public static ExtentReports extent;
+    public static ExtentTest test;
+    static String reportDate = getCurrentDateAndTime().replaceAll("/", "_").replaceAll(":- ", "")
+    		.replaceAll(":", "_").replaceAll("on", "").replaceAll(" ", "_");
     
+    public Base() {
+    	extent = setUpExtentReports();
+    }
     
 	public static WebDriver getDriver() {
 
@@ -112,14 +125,34 @@ public class Base {
 	}
 	
 	public static void logInfoMessage(String message) {
-		logger.info(getCurrentDateAndTime()+message);
+		logger.info(getCurrentDateAndTime().toLowerCase()+message);
 	}
 	
 	public static void logErrorMessage(String message) {
-		logger.error(getCurrentDateAndTime()+message);
+		logger.error(getCurrentDateAndTime().toLowerCase()+message);
 	}
 	
 	public static void logDebugMessage(String message) {
-		logger.debug(getCurrentDateAndTime()+message);
+		logger.debug(getCurrentDateAndTime().toLowerCase()+message);
 	}
+	
+	
+	public ExtentReports setUpExtentReports() {
+		ExtentSparkReporter htmlReporter = new ExtentSparkReporter(PropertiesHandler.testResources+"reports/TestReport_"+reportDate+".html");
+        htmlReporter.config().setDocumentTitle("Automation Report");
+        htmlReporter.config().setReportName("Selenium Test Results");
+        htmlReporter.config().setTheme(Theme.STANDARD);
+
+        extent = new ExtentReports();
+        extent.attachReporter(htmlReporter);
+        logger.info("Setting up Extent Reports on:- "+reportDate);
+        return extent;
+		}
+	
+
+	public static void tearDownExtentReports() {
+        extent.flush();
+        logger.info("Cleaning Extent Reports resources on:- "+reportDate);
+    }
+
 }

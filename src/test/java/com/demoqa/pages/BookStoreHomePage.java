@@ -46,11 +46,12 @@ public class BookStoreHomePage extends Base{
 	
 	public boolean isBookStoreAppMenuItemDisplayed() {
 		logInfoMessage("Checking if BookStoreAppMenuItem is displayed.");
+		waitForElementToBeVisible(wBookStoreAppMenuItem,7,1000);
 		return wBookStoreAppMenuItem.isDisplayed();
 	}
 	
 	public boolean isLoginButtonDisplayed() {
-		waitForElementToBeVisible(wLoginButton,7,1);
+		waitForElementToBeVisible(wLoginButton,7,1000);
 		logInfoMessage("Checking if Login Button is displayed.");
 		return wLoginButton.isDisplayed();
 	}

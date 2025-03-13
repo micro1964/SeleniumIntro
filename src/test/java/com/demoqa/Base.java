@@ -1,6 +1,5 @@
 package com.demoqa;
 
-import java.io.FileNotFoundException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,8 +11,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -27,7 +24,7 @@ import com.demoqa.utils.PropertiesHandler;
  *	WebDriver - Done
  * 	Test Properties - Done
  * 	Logs -Done
- * 	Reporting
+ * 	Reporting - Done
  * 	DataBase
  * 	Mail
  * 	Excel
@@ -37,14 +34,13 @@ import com.demoqa.utils.PropertiesHandler;
 
 public class Base {
 
-	public static WebDriver driver;
+	private static WebDriver driver;
 
     private static final Logger logger = LogManager.getLogger(Base.class);
 	
     public static ExtentReports extent;
     public static ExtentTest test;
-    static String reportDate = getCurrentDateAndTime().replaceAll("/", "_").replaceAll(":- ", "")
-    		.replaceAll(":", "_").replaceAll("on", "").replaceAll(" ", "_");
+    
     
     public Base() {
     	extent = setUpExtentReports();
@@ -125,34 +121,41 @@ public class Base {
 	}
 	
 	public static void logInfoMessage(String message) {
-		logger.info(getCurrentDateAndTime().toLowerCase()+message);
+		logger.info(PropertiesHandler.getDateTimeNow().toLowerCase()+" "+message);
 	}
 	
 	public static void logErrorMessage(String message) {
-		logger.error(getCurrentDateAndTime().toLowerCase()+message);
+		logger.error(PropertiesHandler.getDateTimeNow().toLowerCase()+" "+message);
 	}
 	
 	public static void logDebugMessage(String message) {
-		logger.debug(getCurrentDateAndTime().toLowerCase()+message);
+		logger.debug(PropertiesHandler.getDateTimeNow().toLowerCase()+" "+message);
 	}
 	
 	
 	public ExtentReports setUpExtentReports() {
-		ExtentSparkReporter htmlReporter = new ExtentSparkReporter(PropertiesHandler.testResources+"reports/TestReport_"+reportDate+".html");
-        htmlReporter.config().setDocumentTitle("Automation Report");
-        htmlReporter.config().setReportName("Selenium Test Results");
-        htmlReporter.config().setTheme(Theme.STANDARD);
-
+		ExtentSparkReporter htmlReporter = new ExtentSparkReporter(PropertiesHandler.testResources+"reports/TestReport_"+PropertiesHandler.getDateTimeNow()+".html");
+        htmlReporter.config().setDocumentTitle(PropertiesHandler.getConfig("documentTitle"));
+        htmlReporter.config().setReportName(PropertiesHandler.getConfig("reportName"));
+        htmlReporter.config().setTheme(Theme.DARK);
+        
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
-        logger.info("Setting up Extent Reports on:- "+reportDate);
+        extent.setSystemInfo("Environment", "localhost-Dev");
+        extent.setSystemInfo("Operating System Name", System.getProperty("os.name"));
+        extent.setSystemInfo("Operating System Version", System.getProperty("os.version"));
+        extent.setSystemInfo("System Architecture", System.getProperty("os.arch"));
+        extent.setSystemInfo("User Name", System.getProperty("user.name"));
+        extent.setSystemInfo("Browser Type", PropertiesHandler.getConfig("browserType"));
+        
+        logger.info("Setting up Extent Reports on:- "+PropertiesHandler.getDateTimeNow());
         return extent;
 		}
 	
 
 	public static void tearDownExtentReports() {
         extent.flush();
-        logger.info("Cleaning Extent Reports resources on:- "+reportDate);
+        logger.info("Cleaning Extent Reports resources on:- "+PropertiesHandler.getDateTimeNow());
     }
 
 }

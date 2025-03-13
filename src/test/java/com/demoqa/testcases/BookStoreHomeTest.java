@@ -1,35 +1,44 @@
 package com.demoqa.testcases;
 
+import static org.testng.Assert.assertTrue;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.demoqa.Base;
 import com.demoqa.pages.BookStoreHomePage;
 
+@Listeners(com.demoqa.utils.TestListener.class)
 public class BookStoreHomeTest {
 	
 	BookStoreHomePage bsHomePage = new BookStoreHomePage();
-	String testTitle = "canNavigateToBookStoreHomePage";
-	@Test
+
+	@Test (priority=1)
 	public void canNavigateToBookStoreHomePage() {
-		Base.test=Base.extent.createTest(testTitle);
-		Base.logInfoMessage("Starting "+testTitle+" Test.");
 		bsHomePage.clickBookStoreCard();
-		
-		//Check for expected title
 		Assert.assertEquals(bsHomePage.getWindowTitle(), "DEMOQA");
-		Base.test.pass("Browser title is as expected.");
-		
-		//Check for expected menu item
+		}
+	
+	@Test (priority=2)
+	public void bookStoreAppMenuItemIsDisplayed() {
 		Assert.assertEquals(bsHomePage.isBookStoreAppMenuItemDisplayed(), true);
-		Base.test.pass("Menu item is displayed as expected");
-		
-		//Check for Login Button
+		}
+	
+	@Test (priority=3)
+	public void loginButtonIsDisplayed() {
 		Assert.assertEquals(bsHomePage.isLoginButtonDisplayed(), true);
-		Base.test.pass("Button is displayed as expected");
+		}
 		
-		Base.tearDownExtentReports();
+	@Test (priority=4)
+	public void intentionalFailingTest() {
+		assertTrue(false);
+	}
+	
+	@Test (priority=5)
+	public void intentionalSkippedTest() {
+		System.out.println("Dummy Test");
 	}
 	
 	@AfterClass

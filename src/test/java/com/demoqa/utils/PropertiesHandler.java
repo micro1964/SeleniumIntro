@@ -1,7 +1,6 @@
 package com.demoqa.utils;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Properties;
@@ -9,7 +8,6 @@ import java.util.Properties;
 public class PropertiesHandler {
 
 	static Properties config = new Properties();
-	//public static Properties objectRepo = new Properties();
 
 	public static String fs = System.getProperty("file.separator");
 	public static String userDir = System.getProperty("user.dir");
@@ -42,23 +40,9 @@ public class PropertiesHandler {
 		return sTime+"_"+sDate;
 	}
 	
-	public static String getScreenshotFilename() {
-		
+	public static String getScreenshotFilename() {		
 		return screenshotFolder+"img"+getDateTimeNow()+".png";
 	}
-	/*
-	NOT Needed due to PageFactory limitation - Value must be a constant
-	public static String getObjectRepo(String strKey) throws FileNotFoundException {
-		String result="";
-		FileInputStream fis2 = new FileInputStream(objectRepoFile);
-		try {
-			objectRepo.load(fis2);
-		} catch (Exception e) {
-			e.getMessage();
-		}
 
-		return result;
-	}
-	*/
 
 }

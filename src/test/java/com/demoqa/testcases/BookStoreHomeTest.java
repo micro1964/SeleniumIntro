@@ -1,8 +1,6 @@
 package com.demoqa.testcases;
 
-import static org.testng.Assert.assertTrue;
-
-import org.testng.Assert;
+import org.testng.AssertJUnit;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -18,22 +16,22 @@ public class BookStoreHomeTest {
 	@Test (priority=1)
 	public void canNavigateToBookStoreHomePage() {
 		bsHomePage.clickBookStoreCard();
-		Assert.assertEquals(bsHomePage.getWindowTitle(), "DEMOQA");
+		AssertJUnit.assertEquals(bsHomePage.getWindowTitle(), "DEMOQA");
 		}
 	
 	@Test (priority=2)
 	public void bookStoreAppMenuItemIsDisplayed() {
-		Assert.assertEquals(bsHomePage.isBookStoreAppMenuItemDisplayed(), true);
+		AssertJUnit.assertEquals(bsHomePage.isBookStoreAppMenuItemDisplayed(), true);
 		}
 	
 	@Test (priority=3)
 	public void loginButtonIsDisplayed() {
-		Assert.assertEquals(bsHomePage.isLoginButtonDisplayed(), true);
+		AssertJUnit.assertEquals(bsHomePage.isLoginButtonDisplayed(), true);
 		}
 		
 	@Test (priority=4)
 	public void intentionalFailingTest() {
-		assertTrue(false);
+		AssertJUnit.assertTrue(false);
 	}
 	
 	@Test (priority=5)

@@ -39,8 +39,6 @@ public class TestListener implements ITestListener{
 		t = e.createTest(result.getName());
 		t.fail("The actual results don't match the expected");
 		t.log(Status.FAIL, result.getThrowable());
-		//t.addScreenCaptureFromPath("file:\\\\\\"+PropertiesHandler.reportFolder+PropertiesHandler.getDateTimeNow()+".png", PropertiesHandler.getDateTimeNow()+".png");
-		//t.addScreenCaptureFromBase64String("file:///"+PropertiesHandler.reportFolder+PropertiesHandler.getDateTimeNow()+".png");
 		String sFilename = TestUtil.captureScreenshot();
 		t.addScreenCaptureFromPath(sFilename);
 	}

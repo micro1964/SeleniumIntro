@@ -41,7 +41,8 @@ public class TestListener implements ITestListener{
 		t.log(Status.FAIL, result.getThrowable());
 		//t.addScreenCaptureFromPath("file:\\\\\\"+PropertiesHandler.reportFolder+PropertiesHandler.getDateTimeNow()+".png", PropertiesHandler.getDateTimeNow()+".png");
 		//t.addScreenCaptureFromBase64String("file:///"+PropertiesHandler.reportFolder+PropertiesHandler.getDateTimeNow()+".png");
-		t.addScreenCaptureFromPath("file:\\\\\\"+PropertiesHandler.reportFolder+PropertiesHandler.getDateTimeNow()+".png");
+		String sFilename = TestUtil.captureScreenshot();
+		t.addScreenCaptureFromPath(sFilename);
 	}
 	
 	@Override

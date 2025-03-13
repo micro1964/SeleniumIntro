@@ -206,3 +206,15 @@
 2025-03-13 02:43:39 [main] INFO  Base - 2_43_39_13_3_2025 Checking if BookStoreAppMenuItem is displayed.
 2025-03-13 02:43:39 [main] INFO  Base - 2_43_39_13_3_2025 Waiting for WebElement 
 2025-03-13 02:43:40 [main] INFO  Base - 2_43_40_13_3_2025 Closing Browser!!!
+2025-03-13 14:02:39 [main] INFO  Base - Setting up Extent Reports on:- 14_2_39_13_3_2025
+2025-03-13 14:02:53 [main] INFO  Base - 14_2_53_13_3_2025 Chrome Driver is selected.
+2025-03-13 14:02:56 [main] INFO  Base - 14_2_56_13_3_2025 Navigating to: - https://demoqa.com
+2025-03-13 14:02:59 [main] INFO  Base - 14_2_59_13_3_2025 Pressing the Scroll Down button...
+2025-03-13 14:03:00 [main] INFO  Base - 14_3_0_13_3_2025 BookStoreCard clicked.
+2025-03-13 14:03:00 [main] INFO  Base - 14_3_0_13_3_2025 Retrieving the browser title
+2025-03-13 14:03:00 [main] INFO  Base - 14_3_0_13_3_2025 Checking if BookStoreAppMenuItem is displayed.
+2025-03-13 14:03:00 [main] INFO  Base - 14_3_0_13_3_2025 Waiting for WebElement 
+2025-03-13 14:03:01 [main] INFO  Base - 14_3_1_13_3_2025 Waiting for WebElement Login
+2025-03-13 14:03:01 [main] INFO  Base - 14_3_1_13_3_2025 Checking if Login Button is displayed.
+2025-03-13 14:03:02 [main] INFO  Base - 14_3_2_13_3_2025 Screenshot taken
+2025-03-13 14:03:03 [main] INFO  Base - 14_3_3_13_3_2025 Closing Browser!!!

@@ -27,14 +27,14 @@ import com.demoqa.utils.PropertiesHandler;
  * 	Reporting - Done
  * 	DataBase
  * 	Mail
- * 	Excel
+ * 	Excel -POI Class Java/
  * 
  * @Author	Reggy Williams
  */
 
 public class Base {
 
-	private static WebDriver driver;
+	protected static WebDriver driver;
 
     private static final Logger logger = LogManager.getLogger(Base.class);
 	

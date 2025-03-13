@@ -17,6 +17,7 @@ public class PropertiesHandler {
 
 	public static String configFile = testResources + "config.properties";
 	public static String reportFolder = testResources + "reports"+fs;
+	public static String screenshotFolder = testResources + "screenshots"+fs;
 
 	static String reportDate;
 	public static String getConfig(String strKey) {
@@ -39,6 +40,11 @@ public class PropertiesHandler {
 		String sDate = myDateNow.getDayOfMonth()+"_"+myDateNow.getMonthValue()+"_"+myDateNow.getYear();
 	
 		return sTime+"_"+sDate;
+	}
+	
+	public static String getScreenshotFilename() {
+		
+		return screenshotFolder+"img"+getDateTimeNow()+".png";
 	}
 	/*
 	NOT Needed due to PageFactory limitation - Value must be a constant

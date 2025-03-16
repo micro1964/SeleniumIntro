@@ -3,6 +3,8 @@ package com.demoqa;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -94,11 +96,15 @@ public class Base {
 	}
 
 	public static void closeBrowser() {
-		if (driver != null) {
-			driver.quit();
-			driver = null;
+		Set handles = driver.getWindowHandles();
+		logInfoMessage("Window handles: - "+handles.size());
+		Iterator it =handles.iterator();
+		while(it.hasNext()) {
+			String hand = (String) it.next();
+			driver.switchTo().window(hand);
+			driver.close();
 			logInfoMessage("Closing Browser!!!");
-		}
+			}
 	}
 
 	public static void goToApplicationUnderTest() {
@@ -148,14 +154,15 @@ public class Base {
         extent.setSystemInfo("User Name", System.getProperty("user.name"));
         extent.setSystemInfo("Browser Type", PropertiesHandler.getConfig("browserType"));
         
-        logger.info("Setting up Extent Reports on:- "+PropertiesHandler.getDateTimeNow());
+        logInfoMessage("Setting up Extent Reports on:- "+PropertiesHandler.getDateTimeNow());
         return extent;
 		}
 	
 
 	public static void tearDownExtentReports() {
         extent.flush();
-        logger.info("Cleaning Extent Reports resources on:- "+PropertiesHandler.getDateTimeNow());
+        logInfoMessage("Cleaning Extent Reports resources on:- "+PropertiesHandler.getDateTimeNow());
+        //closeBrowser();
     }
 
 }

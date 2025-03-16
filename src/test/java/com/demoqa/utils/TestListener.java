@@ -37,10 +37,16 @@ public class TestListener implements ITestListener{
 	@Override
 	public void onTestFailure(ITestResult result) {
 		t = e.createTest(result.getName());
-		t.fail("The actual results don't match the expected");
-		t.log(Status.FAIL, result.getThrowable());
-		String sFilename = TestUtil.captureScreenshot();
-		t.addScreenCaptureFromPath(sFilename);
+		
+		try {	
+			String sFilename = TestUtil.captureScreenshot();
+			t.addScreenCaptureFromPath(sFilename);
+			t.fail("The actual results don't match the expected");
+			t.log(Status.FAIL, result.getThrowable());
+		}
+		catch(Exception e) {
+			result.getThrowable();
+		}
 	}
 	
 	@Override
@@ -73,8 +79,8 @@ public class TestListener implements ITestListener{
 	
 	@Override
 	public void onFinish(ITestContext context) {
-		e.flush();
-		//ITestListener.super.onFinish(context);
+		//e.flush();
+		Base.tearDownExtentReports();
 	}
 
 	

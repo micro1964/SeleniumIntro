@@ -41,7 +41,7 @@ public class PropertiesHandler {
 	}
 	
 	public static String getScreenshotFilename() {		
-		return screenshotFolder+"img"+getDateTimeNow()+".png";
+		return screenshotFolder+"img_"+getDateTimeNow()+".png";
 	}
 
 

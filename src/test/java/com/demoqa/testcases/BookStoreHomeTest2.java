@@ -10,7 +10,7 @@ import com.demoqa.Base;
 import com.demoqa.pages.BookStoreHomePage;
 
 @Listeners(com.demoqa.utils.TestListener.class)
-public class BookStoreHomeTest {
+public class BookStoreHomeTest2 {
 	
 	BookStoreHomePage bsHomePage = new BookStoreHomePage();
 

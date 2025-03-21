@@ -70,4 +70,8 @@ public class BookStoreHomePage extends Base{
         
         wait.until(driver -> element.isDisplayed());
     }
+	
+	public WebDriver getBddDriver() {
+		return this.driver;
+	}
 }

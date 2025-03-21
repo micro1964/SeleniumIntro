@@ -1,8 +1,10 @@
 package com.demoqa;
 
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -16,6 +18,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.demoqa.utils.PropertiesHandler;
@@ -98,13 +101,16 @@ public class Base {
 	public static void closeBrowser() {
 		Set handles = driver.getWindowHandles();
 		logInfoMessage("Window handles: - "+handles.size());
+		/*
 		Iterator it =handles.iterator();
 		while(it.hasNext()) {
 			String hand = (String) it.next();
 			driver.switchTo().window(hand);
 			driver.close();
 			logInfoMessage("Closing Browser!!!");
-			}
+			}*/
+		driver.close();
+		logInfoMessage("Closing Browser!!!");
 	}
 
 	public static void goToApplicationUnderTest() {
@@ -158,6 +164,24 @@ public class Base {
         return extent;
 		}
 	
+	public static ExtentReports getInstance() {
+		extent = null;
+        if (extent == null) {
+            String timestamp = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
+            String reportPath = PropertiesHandler.testResources+"reports/BddReport_" + timestamp + ".html";
+
+            ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(reportPath);
+            extent = new ExtentReports();
+            extent.setSystemInfo("Environment", "localhost-Dev");
+            extent.setSystemInfo("Operating System Name", System.getProperty("os.name"));
+            extent.setSystemInfo("Operating System Version", System.getProperty("os.version"));
+            extent.setSystemInfo("System Architecture", System.getProperty("os.arch"));
+            extent.setSystemInfo("User Name", System.getProperty("user.name"));
+            extent.setSystemInfo("Browser Type", PropertiesHandler.getConfig("browserType"));
+            extent.attachReporter(htmlReporter);
+        }
+        return extent;
+    }
 
 	public static void tearDownExtentReports() {
         extent.flush();

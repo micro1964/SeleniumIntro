@@ -65,12 +65,7 @@
 			<artifactId>cucumber-java</artifactId>
 			<version>7.21.1</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-junit</artifactId>
-			<version>7.21.1</version>
-		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-core -->
 		<dependency>
 			<groupId>io.cucumber</groupId>
@@ -90,7 +85,13 @@
 			<artifactId>cucumber-picocontainer</artifactId>
 			<version>7.21.1</version>
 		</dependency>
-
+		<!--
+		https://mvnrepository.com/artifact/tech.grasshopper/extentreports-cucumber7-adapter -->
+		<dependency>
+			<groupId>tech.grasshopper</groupId>
+			<artifactId>extentreports-cucumber7-adapter</artifactId>
+			<version>1.14.0</version>
+		</dependency>
 
 
 	</dependencies>
